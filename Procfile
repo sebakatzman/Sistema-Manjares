@@ -1,0 +1,1 @@
+web: gunicorn manjaresdelbeagle.wsgi --log-file -

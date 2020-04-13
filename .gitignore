@@ -92,9 +92,3 @@ db.sqlite3
 .idea/modules.xml
 .idea/vcs.xml
 .idea/workspace.xml
-
-# Text backup files
-*.bak
-
-#Database
-*.sqlite3
