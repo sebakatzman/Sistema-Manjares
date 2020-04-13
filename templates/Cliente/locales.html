@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{% static 'css/estiloCliente.css' %}">
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Manjares del Beagle</title>
+    <link rel="shortcut icon" type="image/x-icon" href="media/logo.ico" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="{% static 'css/all.css' %}">
+    {% block navbar %}
+    <!-- Cabecera -->
+    <div class="jumbotron text-center" style="background-image: url(media/Textura.jpg); background-size: 100%; padding-top: 2%; padding-bottom: 1%;">
+      <div class="row">
+        <!-- Logo -->
+          <div class="col-sm-2">
+            <a href="{% url 'indexCliente' %}"><img src="/media/logo.png" class="rounded float-left" height="100px" width="100px"></a>
+        </div>
+        <div class="col-sm-8">
+            <font style="float: center;" class="nav-link" face="impact" size="8" color="green">MANJARES DEL BEAGLE</font>
+        </div>
+        <!-- Carrito -->
+        <div class="col-sm-2" style="padding: 1rem; text-align: right;">
+          <a href="{% url 'carrito' %}">
+            <i class="fas fa-shopping-cart" style="width: 50px; height: 50px; color: green;"></i>
+          </a>
+        </div>
+      </div>
+
+      <hr style="background-color: black; width: 80%">
+
+      <nav class="navbar navbar-expand">
+        <div class="container">
+          <div class="navbar-collapse collapse" id="navbar10">
+            <ul class="navbar-nav nav-fill w-100">
+              <li class="nav-item" style="font-family: 'impact', Times, serif; font-size: 25px;">
+                <div class="btn-group">
+                  <!-- Titulo Categoria -->
+                  <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" style="color: green">CATEGORIAS</a>
+                  <div class="dropdown-menu">
+                    {% for categoria in categorias %}
+                      <a class="dropdown-item" href= "#{{categoria.pk}}" data-scroll>{{categoria.pk}}</a>
+                    {% endfor %}
+                  </div>
+                </div>
+              </li>
+              <li class="nav-item" style="font-family: 'impact', Times, serif; font-size: 25px;">
+                <a class="nav-link" href="{%url 'quienesSomos'%}" style="color: green">¿QUIENES SOMOS?</a>
+              </li>
+              <li class="nav-item" style="font-family: 'impact', Times, serif; font-size: 25px;">
+                <a class="nav-link" href="{%url 'contacto'%}" style="color: green">CONTACTO</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  {% endblock %}
+</head>
+<body>
+  <div class="container">
+    {% block content %}
+      <!-- Contenido del indexCliente -->
+    {% endblock %}
+  </div>
+  
+  <!-- Pie de pagina -->
+  <div class="jumbotron text-center" style="margin-bottom:0; background-image: url(media/Textura.jpg); background-size: 100%; padding-top: 2%; padding-bottom: 0.5%;">
+		<div class="row">
+		  <div class="col-sm-10">
+		    <p style="color: gray; text-align: left;">Manjares del Beagle<br>Todos los derechos reservados - 2019</p>
+		 	</div>
+		 	<!-- Redes Sociales -->
+		 	<div class="col-sm-1">
+		    <a href="https://www.facebook.com/Manjares-Del-Beagle-354696055382898/?ref=py_c">
+		    	<i class="fab fa-facebook-square" style="width: 40px; height: 40px; color: gray;"></i>
+		    </a>
+		 	</div>
+		 	<div class="col-sm-1">
+		    <a href="https://www.instagram.com/delbeaglemanjares/">
+		    	<i class="fab fa-instagram" style="width: 40px; height: 40px; color: gray;"></i>
+		    </a>
+		 	</div>
+		</div>
+	</div>
+
+  <script>
+  function initialize() {
+    var input = document.getElementById('direccion');
+    var options = {
+			  types: ['address'],
+			  componentRestrictions: {'country': 'ARG'}
+			};
+    var autocomplete = new google.maps.places.Autocomplete(input, options);
+    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+    //GUARDAR LAT Y LONG EN MODELO MAPA
+    var place = autocomplete.getPlace();
+    document.getElementById('latitud').value = place.geometry.location.lat();
+    document.getElementById('longitud').value = place.geometry.location.lng();
+    });
+  }
+  google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
+
+  <script type='text/javascript' src="{%static 'js/smooth-scroll.min.js'%}"></script>
+  <script type='text/javascript' src="{%static 'js/all.js'%}"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+{% extends "Layouts/baseRecepcionista.html" %}
+{% block content %}
+    <meta http-equiv="refresh" content="30">
+    <h1 style="text-align: center">Historial de Pedidos</h1>
+    <hr style="background-color: black; width: 50%">
+    <br>
+    {% if pedidos %} 
+        {% for pedido in pedidos %}
+            {% if pedido.estadoPedido.estado == 'entregado' and not pedido.descripcion == 'INICIO' %}
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Pedido Nº: {{pedido.id}}</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5>Cliente: {{pedido.nombre_cliente}}</h5>
+                        <h5>Descripción: {{pedido.descripcion}}</h5>
+                        <h5>Dirección: {{pedido.mapa.direccion}}</h5>
+                        <h5>Teléfono: {{pedido.telefono_cliente}}</h5>
+                        <h5>Forma de pago: {{pedido.pago}}</h5>
+                        <table class="table table-bordered">
+                            <thead> 
+                                <tr align="center"> 
+                                    <td><b>Producto</b></td> 
+                                    <td><b>Cantidad</b></td> 
+                                    <td><b>Precio</b></td> 
+                                    <td><b>Subtotal</b></td> 
+                                </tr>
+                            </thead>
+                            {% for pedidoProducto in pedidoProductos %}
+                                {% if pedido.id == pedidoProducto.pedido.id %}
+                                    <tr>
+                                        <td>{{pedidoProducto.producto.nombre}}</td>
+                                        <td>{{pedidoProducto.cantidad}}</td>
+                                        <td>{{pedidoProducto.precioVariable}}</td>
+                                        <td>{{pedidoProducto.subtotal}}</td>
+                                    </tr>  
+                                {% endif %}
+                            {% endfor %}
+                            <tr>
+                                <td><b>Total: ${{ pedido.total }}</b></td>
+                            </tr> 
+                        </table>
+                    </div>
+                </div><br>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endblock %}

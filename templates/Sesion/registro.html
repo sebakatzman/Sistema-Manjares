@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registro</title>
+    <link rel="shortcut icon" type="image/x-icon" href="media/logo.ico" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body class="text-center" style="background-image: url(/media/Textura.jpg); background-size: 100%;">
+    <form method = "post">
+        {% csrf_token %}
+        <div class="card text-center" style="width: 30%; margin:auto auto auto auto; margin-top: 4%;">
+            <div class="card-body">
+                <div id="div_id_username" class="form-group">
+                    <label for="id_username" class=" requiredField" style="float: left;">Nombre de usuario:</label>
+                    <div class="">
+                        <input type="text" name="username" maxlength="150" autofocus class="textinput textInput form-control" required id="id_username">
+                    </div>
+                </div>
+                <div id="div_id_password1" class="form-group">
+                    <label for="id_password1" class=" requiredField" style="float: left;">Contraseña:</label>
+                    <div class="">
+                        <input type="password" name="password1" class="textinput textInput form-control" required id="id_password1">
+                        <p>La contraseña debe contener mayusculas, minusculas y numeros.</p>
+                    </div>
+                </div>
+                <div id="div_id_password2" class="form-group">
+                    <label for="id_password2" class=" requiredField" style="float: left;">Confirmación de contraseña:</label>
+                    <input type="password" name="password2" class="textinput textInput form-control" required id="id_password2">
+                </div>
+                <div id="div_id_rol" class="form-group">
+                    <label for="id_rol" class=" requiredField" style="float: left;">Rol:</label>
+                    <div class="" >
+                        <select name="rol" id="id_rol">
+                            {% for item in roles %}
+                                <option value="{{item.id}}">{{item.nombre}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <button class="btn btn-lg btn-success btn-block" type="submit">Registrarme</button>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

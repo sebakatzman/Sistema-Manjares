@@ -1,0 +1,74 @@
+/* div id */
+#map {
+	/* ANCHO */
+	width: 100%;
+	/* ALTO */
+	height: 640px;
+}
+
+/* class */
+.contenedor {
+	/* fixed: posicionamiento absoluto y fijo */
+	position: fixed;
+	height: 0;
+	width: 100%;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1;
+	background-image: url(/media/Textura.jpg);
+	background-size: 100%;
+	overflow-x: hidden;
+	transition: 0.4s;
+	padding: 0;
+	box-sizing:border-box;
+	text-align: center;
+}
+
+.contenedor .boton-cerrar {
+	position: absolute;
+	top: 0.5rem;
+	right: 1rem;
+	font-size: 2rem;
+	display: block;
+	padding: 0;
+	line-height: 1.5rem;
+	margin: 0;
+	height: 32px;
+	width: 32px;
+	text-align: top;
+}
+/* boton cerrar */
+.contenedor a{
+	font-size: 120%;
+	color: black;
+	background-color: transparent;
+	text-decoration: none;
+}
+
+.contenedor img{
+	position: relative;
+	/* ANCHO */
+	width: 80%;
+	/* ALTO */
+	height: 90%;
+	top: 10%;
+	border:3px solid green;
+}
+
+.contenedor h6{
+	text-align: left;
+	margin-left: 5%;
+}
+
+#imagen {
+	text-align: center;
+	border: black 20px;
+}
+
+#abrir {
+	
+}
+#cerrar {
+	display:none;
+}

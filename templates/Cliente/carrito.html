@@ -1,0 +1,145 @@
+{% extends 'Cliente/base.html'%}
+
+{% block content %}
+<h2 style="text-align: center;">Carrito</h2>
+<hr style="height: 3px; background-color: black;" width="90%"/>
+
+<div class="table-responsive" id="tableContainer">
+    <table id="table" class="table table-striped table-bordered border-warning" style="max-width:100%" align="center">
+        <thead>
+            <tr align="center">
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Subtotal</th>
+                <th>Gestión</th>
+            </tr>
+        </thead>
+        <tbody>
+                {% for datos in lista %}
+                <tr>
+                    <form action="/eliminarItem" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="alimento" value={{datos.alimentoID}}>
+                        <td><b>{{datos.alimentoNombre}}</b></td>            
+                        <td>{{datos.cantidad}}</td>
+                        <td>${{datos.precio}}</td>            
+                        <td>${{datos.subtotal}}</td>
+                        <td><button class="btn btn-danger btn-flat" type="submit">Quitar</button></td>
+                    </form>
+                </tr>
+                {% endfor %}
+                <td><b>Total: ${{total}}</b></td>
+            </tbody>
+    </table>
+</div>
+<br>
+<br>
+<div class="row">
+    <div class="col-sm-6" style="padding-left: 5%;">
+        <a href="{% url 'indexCliente' %}" class="btn btn-success btn-lg active" role="button" aria-pressed="true">Seguir comprando</a>
+    </div>
+    <div class="col-sm-6" style="padding-right: 5%;" align="right">
+        <a class="btn btn-success btn-lg active" role="button" aria-pressed="true" onclick="vaciarCarrito()">Vaciar carrito</a>
+    </div>
+</div>
+
+<h2 style="text-align: center;">Datos Personales</h2>
+<hr style="height: 3px; background-color: black;" width="90%"/>
+<br>
+
+<div id="mensajes">
+    {% for message in messages %}
+      <div class="alert {{message.tags}} alert-dismissible" role="alert">
+        <button type="button" id="btnMje" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>{{message}}
+      </div>
+    {% endfor %}
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+    <!-- INICIO FORMULARIO -->
+    <form action="/confirmarPedido" method="post">  
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="nombreApellido">Nombre: </label>
+            <input type="text" placeholder="Introduce tu nombre..." required class="form-control" id="nombreApellido" name="nombreApellido">
+        </div>
+        <div class="form-group">
+            <label>Celular: </label>
+            <input type="text" placeholder="Introduce tu celular..." required class="form-control" id="celular" name="celular">
+        </div>
+        <div class="form-group">
+            <label>Descripción: </label>
+            <input type="text" placeholder="Descripción del pedido..." required class="form-control" id="descripcion" name="descripcion">
+        </div>
+    </div>
+    <div class="col-sm-6" align="center">
+        <fieldset style="width: 400px; border:1px solid black">
+            <legend class="w-auto">Entrega</legend>
+            <input name="entrega" type="radio" value="enlocal" onclick="ocultarDireccion()" />En local. <br>
+            <input name="entrega" type="radio" onclick="mostrarDireccion()" />En domicilio.
+            <input id="direccion" type="text" name="direccion" size="50" placeholder="Ingrese su dirección..."
+            autocomplete="on" runat="server" style="display: none" />
+        </fieldset>
+        <fieldset style="width: 400px; border:1px solid black">
+            <legend class="w-auto">Pago</legend>
+            <input name="pago" type="radio" value="efectivo" onclick="ocultarPago()" />Efectivo.<br>
+            <input name="pago" type="radio" value="online" onclick="mostrarPago()" />Online.
+        </fieldset>
+
+        <input id="latitud" type="hidden" name="latitud" ><br>
+        <input id="longitud" type="hidden" name="longitud" ><br>
+    </div>
+    <div class="col-sm-12" style="padding-right: 5%;" align="right">
+        <button type="submit" class="btn btn-success btn-lg active" role="button" aria-pressed="true" onclick="obtenerDireccion()">Confirmar pedido</button>
+    </div>
+    </form>
+    <!-- FIN FORMULARIO -->
+    <!-- BOTON PAGAR MERCADO PAGO -->
+        <div id="pago_online" style="display: none">
+            <form action="/carrito" method="POST">
+                {% csrf_token %}
+                 <script
+                    src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
+                    data-preference-id="{{preference_id}}">
+                </script>
+            </form>
+        </div>
+    <!-- FIN MERCADO PAGO -->
+</div><br>
+
+<script>
+    function obtenerDireccion() {
+        if (document.getElementById('direccion').value == "") {
+            document.getElementById('direccion').value = "-";
+            document.getElementById('latitud').value = "0";
+            document.getElementById('longitud').value = "0";
+        }
+        if (document.getElementById('descripcion').value == "") {
+            document.getElementById('descripcion').value = "-";
+        }
+    }
+</script>
+
+<script>
+    //DIRECCION
+    function mostrarDireccion() {
+        document.getElementById("direccion").style.display= "inline";
+    }
+    function ocultarDireccion() {
+        document.getElementById("direccion").style.display= "none";
+    }
+    //PAGO
+    function mostrarPago() {
+        document.getElementById("pago_online").style.display= "inline";
+    }
+    function ocultarPago() {
+        document.getElementById("pago_online").style.display= "none";
+    }
+</script>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5bJ7e24SdcnhOtbqPMfC30MrOlhLyMTI&libraries=places"></script>
+{% endblock %}

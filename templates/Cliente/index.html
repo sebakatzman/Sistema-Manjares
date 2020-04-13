@@ -1,0 +1,108 @@
+{% extends 'Cliente/base.html'%}
+{% load static %}
+{% block navbar %}
+    <!-- Cabecera -->
+  <div class="jumbotron text-center" style="background-image: url(media/Textura.jpg); background-size: 100%; padding-top: 2%; padding-bottom: 1%;">
+   <div class="row">
+     <!-- Logo -->
+       <div class="col-sm-2">
+         <a href="{% url 'indexCliente' %}"><img src="/media/logo.png" class="rounded float-left" height="100px" width="100px"></a>
+     </div>
+     <div class="col-sm-8">
+         <font style="float: center;" class="nav-link" face="impact" size="8" color="green">MANJARES DEL BEAGLE</font>
+     </div>
+     <!-- Carrito -->
+     <div class="col-sm-2">
+       <a href="{% url 'carrito' %}">
+         <i class="fas fa-shopping-cart" style="width: 50px; height: 50px; float: right; color: green;"></i>
+       </a>
+     </div>
+   </div>
+
+   <hr style="background-color: black; width: 80%">
+
+   <nav class="navbar navbar-expand-lg">
+     <div class="container">
+       <div class="navbar-collapse collapse" id="navbar10">
+         <ul class="navbar-nav nav-fill w-100">
+           <li class="nav-item" style="font-family: 'impact', Times, serif; font-size: 25px;">
+             <div class="btn-group">
+               <!-- Titulo Categoria -->
+               <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" style="color: green">CATEGORIAS</a>
+               <div class="dropdown-menu">
+                 {% for categoria in categorias %}
+                   <a class="dropdown-item" href="#{{categoria.pk}}">{{categoria.nombre}}</a>
+                 {% endfor %}
+               </div>
+             </div>
+           </li>
+           <li class="nav-item" style="font-family: 'impact', Times, serif; font-size: 25px;">
+             <a class="nav-link" href="{%url 'quienesSomos'%}" style="color: green">¿QUIENES SOMOS?</a>
+           </li>
+           <li class="nav-item" style="font-family: 'impact', Times, serif; font-size: 25px;">
+             <a class="nav-link" href="{%url 'contacto'%}" style="color: green">CONTACTO</a>
+           </li>
+         </ul>
+       </div>
+     </div>
+   </nav>
+   <hr style="background-color: black; width: 80%">
+ </div>
+ {% endblock %}
+   <!-- Menu principal del dia por defecto -->
+   <!-- Si selecciona una categoria, se actualiza el contenido -->
+   {% block content %}
+      <div id="mensajes">
+         {% for message in messages %}
+         <div class="alert {{message.tags}} alert-dismissible" role="alert">
+            <button type="button" id="btnMje" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>{{message}}
+         </div>
+         {% endfor %}
+      </div>
+
+      <div class="container">
+         <div class="row">
+            {% for categoria in categorias %}
+               <!-- Titulo Categoria -->
+               <div class="col-sm-12" id="{{categoria.pk}}">
+                  <h1 style="text-align: center">{{categoria.nombre}}</h1>
+                  <hr style="background-color: black; width: 50%">
+                  <br>
+               </div>
+               {% for producto in productos %}
+                  {% if producto.categoria.nombre == categoria.nombre %} 
+                     <form id="formCarrito{{producto.id}}" method="post" action="/agregaritem">
+                        {% csrf_token %}
+                        <div class="col-sm-4">
+                           <div class="card" style="width:245px; height:auto">
+                              <img class="card-img-top" src="{{producto.foto.url}}" alt="Card image"style="width: auto; height: 200px">
+                              <div class="card-body">
+                                 <h4></h4>{{producto.nombre}} ${{producto.precioActual}}</h4> <hr>
+                                 <p>Descripción: {{producto.descripcion}}</p>
+                                 <input id="alimento" type="hidden" name="alimento" value={{producto.id}}>
+                                 <input id="cantidad" type="number" name="cantidad" min="1" max="50" value="1" style="text-align:center; width: 50%; float: left">
+                                 <button onclick="return formClicked({{producto.id}})" style="float: right" class="btn btn-success">Añadir</button>
+                              </div>
+                           </div>
+                        </div>
+                     </form>
+                  {% endif %}
+               {% endfor %}
+            {% endfor %}
+         </div>
+      </div> <br>
+
+   <script>
+      function formClicked(producto_id) {
+         fetch("/agregaritem", {
+            method: "POST",
+            body: new FormData(document.getElementById('formCarrito'+producto_id))
+         });
+         alert("Se agrego tu producto al carrito.");
+         return false;
+      }
+   </script>
+   {% endblock %}
+

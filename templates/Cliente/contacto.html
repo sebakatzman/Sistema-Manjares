@@ -1,0 +1,62 @@
+{% extends 'Cliente/base.html' %}
+{% block content %}
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="row">
+                <div class="col-sm-4" align="center">
+                    <i class="fas fa-home" style="width: 50px; height: 50px; color: green;"></i>
+                </div>
+                <div class="col-sm-8">
+                    <font face="times new roman" size="5">DIRECCIÓN</FONT>
+                    <p>General Manuel Belgrano 43<br>V9410CVB Ushuaia<br>Tierra del Fuego<br>Argentina</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="row">
+                <div class="col-sm-4" align='center'>
+                    <i class="fas fa-phone-alt" style="width: 50px; height: 50px; color: green;"></i>
+                </div>
+                <div class="col-sm-8">
+                    <font face="times new roman" size="5">TELÉFONOS</FONT>
+                    <p>Teléfono: 425067<br>Celular 1: 2901-554619<br>Celular 2: 2901-498835</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="row">
+                <div class="col-sm-4" align='center'>
+                    <i class="far fa-envelope" style="width: 50px; height: 50px; color: green;"></i>
+                </div>
+                <div class="col-sm-8">
+                    <font face="times new roman" size="5">E-MAIL</FONT>
+                    <p>manjaresdelbeagle@gmail.com</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="row">
+                <div class="col-sm-4" align='center'>
+                    <i class="far fa-clock" style="width: 50px; height: 50px; color: green;"></i>
+                </div>
+                <div class="col-sm-8">
+                    <font face="times new roman" size="5">HORARIO DE ATENCIÓN</FONT>
+                    <p>Lunes a Sábado: 10:00–15:00, 19:00–23:00<br>Domingo: Cerrado<br>Feriado: Cerrado</p>
+                </div>
+            </div>
+        </div>
+        <!-- SEPARADOR -->
+        <hr style="background-color: black; width: 90%;"><br>
+
+        <div class="col-sm-6" align="center">
+            <!-- UBICACION EN MAPA -->
+            <font face="times new roman" size="5">¡Visite nuestro local!</FONT><br>
+            <font face="times new roman" size="5">En Manjares del Beagle tenemos las mejores opciones en menús diarios y comidas rápidas.<br>Garantizamos excelente calidad en todos nuestros productos.</FONT><br>
+            <img src="/media/corriendo.png" height="auto" width="50%">
+        </div>
+        <div class="col-sm-6">
+            <iframe width="90%" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC5bJ7e24SdcnhOtbqPMfC30MrOlhLyMTI&q=Gral.+Manuel+Belgrano+43,+V9410CVB+Ushuaia,+Tierra+del+Fuego" allowfullscreen>
+            </iframe><br><br>
+        </div>
+    </div>
+{% endblock %}

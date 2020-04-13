@@ -1,0 +1,32 @@
+{% extends 'Layouts/baseUsuarios.html'%}
+{% load static %}
+{% block title %}
+  <title>Lista de Categorías</title>
+{% endblock %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12" align="center">
+        <table class="table table-bordered">
+          <thead>
+            <tr align="center">
+              <td><b>Categorías</b></td>
+              <td colspan="2"><b>Acciones</b></td>
+            </tr>
+          </thead>
+          {% if categorías %}
+            {% for item in categorías %}
+              <tr>
+                <td>{{item.nombre}}</td>
+                <td align="center"><a class="btn btn-primary" href="{% url 'editar_categoria' item.nombre %}">Editar</a></td>
+                <td align="center"><a class="btn btn-danger" href="{% url 'borrar_categoria' item.nombre %}">Eliminar</a></td>
+              </tr>
+            {% endfor %}
+        </table>
+          {% else %}
+            <h1>No hay registro de categorías</h1>
+          {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

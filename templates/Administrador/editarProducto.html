@@ -1,0 +1,77 @@
+{% extends 'Layouts/baseUsuarios.html'%}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}
+  <title>Editar {{producto.nombre}}</title>
+{% endblock %}
+{% block content %}
+    <form method="post">
+    {% csrf_token %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="{% url 'listar_producto' %}" class="btn btn-success">Atrás</a> <br>
+                    <div id="div_id_nombre" class="form-group">
+                        <label for="id_nombre" class=" requiredField">Nombre</label>
+                        <input type="text" name="nombre" value='{{producto.nombre}}' maxlength="50" class="textinput textInput form-control" required id="id_nombre">
+                    </div>
+                    <div id="div_id_descripcion" class="form-group">
+                        <label for="id_descripcion" class="">Descripcion</label>
+                        <input type="text" name="descripcion" value="Con papas" maxlength="50" class="textinput textInput form-control" id="id_descripcion">
+                    </div>
+                    <div id="div_id_foto" class="form-group">
+                        <label for="id_foto" class=" requiredField">Imagen</label><br>
+                        <img class="card-img-top" src="/media/{{producto.foto}}/" alt="Card image cap" width="100" height="200">
+                        <br> Modificar:
+                        <input type="file" name="foto" accept="image/*" class="clearablefileinput form-control" id="id_foto">
+                    </div>
+                    <div id="div_id_precioActual" class="form-group">
+                        <label for="id_precioActual" class=" requiredField">Precio Actual</label>
+                        <input type="text" name="precioActual" value={{producto.precioActual}} class="numberinput form-control" required id="id_precioActual">
+                    </div>
+                    <div id="div_id_categoria" class="form-group">
+                        <label for="id_categoria" class=" requiredField">Categoria</label>
+                        <select name="categoria" class="select form-control" required id="id_categoria">
+                            {% for categoria in categorias %}
+                                <option value="{{categoria.pk}}">{{categoria.nombre}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div id="div_id_ganancia" class="form-group">
+                        <label for="id_ganancia" class=" requiredField">Ganancia</label>
+                        <input type="text" name="ganancia" value={{producto.ganancia}} class="numberinput form-control" required id="id_ganancia">
+                    </div>
+                    <input class="btn btn-success" value="Modificar" onclick="cambiarNumeros()" type="submit">
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        function cambiarNumeros() {
+            //precio actual
+            var precio = document.getElementById('id_precioActual').value;
+            var precioReal = "";
+            for (var i=0; i<precio.length; i++){
+                if (precio[i] == ",") {
+                    precioReal = precioReal + ".";
+                } else {
+                    precioReal = precioReal + precio[i];
+                }
+            }
+            document.getElementById('id_precioActual').value = precioReal;
+
+            //ganancia
+            precioReal = "";
+            var ganancia = document.getElementById('id_ganancia').value;
+            for (var i=0; i<ganancia.length; i++){
+                if (ganancia[i] == ",") {
+                    precioReal = precioReal + ".";
+                } else {
+                    precioReal = precioReal + precio[i];
+                }
+            }
+            document.getElementById('id_ganancia').value = precioReal;
+        }
+    </script>
+{% endblock %}

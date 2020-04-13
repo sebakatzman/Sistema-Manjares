@@ -1,0 +1,36 @@
+{% extends 'Layouts/baseUsuarios.html'%}
+{% load static %}
+{% block title %}
+    <title>Lista de Productos</title>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12" align="center">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr align="center">
+                            <td><b>Producto</b></td>
+                            <td><b>Descripcion</b></td>
+                            <td><b>Precio</b></td>
+                            <td colspan="2"><b>Acciones</b></td>
+                        </tr>
+                    </thead>
+                    {% if productos %}
+                        {% for item in productos %}
+                            <tr>
+                                <td>{{item.nombre}}</td>
+                                <td>{{item.descripcion}}</td>
+                                <td align="center">{{item.precioActual}}</td>
+                                <td align="center"><a class="btn btn-primary" href="{% url 'editar_producto' item.id %}">Editar</a></td>
+                                <td align="center"><a class="btn btn-danger" href="{% url 'borrar_producto' item.nombre %}">Eliminar</a></td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <h1>No hay registros de productos</h1>
+                    {% endif %}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

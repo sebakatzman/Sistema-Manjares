@@ -1,0 +1,45 @@
+{% extends 'Layouts/baseUsuarios.html'%}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}
+  <title>Inicio</title>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6" >
+                <form method = "post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                   
+                    <div id="div_id_nombre" class="form-group">
+                        <label for="id_nombre" class=" requiredField">Nombre</label>
+                        <input type="text" name="nombre" maxlength="50" class="textinput textInput form-control" required id="id_nombre">
+                    </div>
+                    <div id="div_id_descripcion" class="form-group">
+                        <label for="id_descripcion" class="">Descripcion</label>
+                        <input type="text" name="descripcion" maxlength="50" class="textinput textInput form-control" id="id_descripcion">
+                    </div>
+                    <div id="div_id_foto" class="form-group">
+                        <label for="id_foto" class=" requiredField">Foto</label>
+                        <input type="file" name="foto" accept="image/*" class="clearablefileinput form-control" required id="id_foto">
+                    </div>
+                    <div id="div_id_precioActual" class="form-group">
+                        <label for="id_precioActual" class=" requiredField">Precio Actual</label>
+                        <input type="number" name="precioActual" step="0.001" class="numberinput form-control" required id="id_precioActual">
+                    </div>
+                    <div>Categoria</div>
+                    <select name="categoria" id="id_categoria">
+                        {% for item in categorias %}
+                            <option value="{{item.pk}}">{{item.nombre}}</option>
+                        {% endfor %}
+                    </select>
+                    <div id="div_id_ganancia" class="form-group">
+                        <label for="id_ganancia" class=" requiredField">Ganancia</label>
+                        <input type="number" name="ganancia" class="numberinput form-control" required id="id_ganancia">
+                    </div>
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

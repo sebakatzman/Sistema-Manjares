@@ -1,0 +1,21 @@
+{% extends 'Layouts/baseUsuarios.html'%}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}
+  <title>Eliminar {{producto.nombre}}</title>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12" style="text-align: center">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <h3>¿Desea eliminar el producto <b>"{{producto.nombre}}"</b>?</h3>
+                    <button class="btn btn-danger" type=" submit">Si, eliminar</button>
+                    <a class="btn btn-success" href="{% url 'listar_producto' %}">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

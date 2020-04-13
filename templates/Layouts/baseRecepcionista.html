@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+  <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="{% static 'css/estiloCliente.css' %}">
+  <link rel="stylesheet" href="{% static 'css/simple-sidebar.css' %}">
+
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% block title %}
+    <!-- <title>Manjares del Beagle</title> -->
+  {% endblock %}
+  <link rel="shortcut icon" type="image/x-icon" href="media/logo.ico" />
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- FontAwesome para iconos -->
+  <link rel="stylesheet" href="{% static 'css/all.css' %}">
+</head>
+<body>
+    <!-- Cabecera -->
+    <div class="jumbotron text-center" style="background-image: url('media/Textura.jpg'); background-size: 100%; padding-top: 2%; padding-bottom: 1%;">
+        <div class="row">
+            <!-- Logo -->
+            <div class="col-sm-2">
+                <a href="{% url 'recepcionista' %}"><img src="/media/logo.png" class="rounded float-left" height="100px" width="100px"></a>
+            </div>
+            <div class="col-sm-8">
+                <font style="float: center;" class="nav-link" face="impact" size="8" color="green">MANJARES DEL BEAGLE</font>
+            </div>
+            <!-- Cerras Sesion -->
+            <div class="col-sm-2" style="padding: 1.5rem; text-align: center;">
+                <a class="btn btn-success" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+            </div>
+        </div>
+    </div>
+    <!-- FIIN Cabecera -->
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">GESTIÓN DE PEDIDOS
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="{% url 'recepcionista' %}" class="list-group-item list-group-item-action bg-light">Pedidos Pendientes</a>
+                <a href="{% url 'pedidos_confirmados' %}" class="list-group-item list-group-item-action bg-light">Pedidos Confirmados</a>
+                <a href="{% url 'pedidos_rechazados' %}" class="list-group-item list-group-item-action bg-light">Pedidos Rechazados</a>
+                <a href="{% url 'pedidos_listos' %}" class="list-group-item list-group-item-action bg-light">Pedidos Listos</a>
+                <a href="{% url 'historial_pedidos' %}" class="list-group-item list-group-item-action bg-light">Historial</a>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <button class="btn btn-success" id="menu-toggle">Menú</button>
+            </nav>
+
+            <div class="container-fluid">
+                {% block content %}
+                    <!-- Contenido-->   
+                {% endblock %}
+            </div>   
+        <!-- /#page-content-wrapper -->
+        </div>
+    <!-- /#wrapper -->
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- Menu Toggle Script -->
+    <script>
+        $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+</body>
+</html>

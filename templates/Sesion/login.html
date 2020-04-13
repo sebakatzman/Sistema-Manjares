@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/media/logo.ico" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+  </head>
+  <body class="text-center" style="background-image: url(/media/Textura.jpg); background-size: 100%;">
+    <form class=" site-form" action="/accounts/login/" method="post">
+      {% csrf_token %}
+      <div class="card text-center" style="width: 30%; margin:auto auto auto auto; margin-top: 4%;">
+        <div class="card-header">
+          <img class="mt-4 mb-4" src="/media/DefaultPerfil.png" width="40%" height="40%">
+        </div>
+        <br>
+        <div class="card-body">
+          <!-- E-MAIL -->
+          <label class="sr-only">Usuario</label>
+          <input type="text" name="username" placeholder="Usuario" autofocus class="textinput textInput form-control" required id="id_username">
+          <!-- CONTRASEÑA -->
+          <label  class="sr-only">Contraseña</label>
+          <input type="password" name="password" placeholder="Contraseña" class="textinput textInput form-control" required id="id_password">
+          <br>
+          <div class="checkbox mb-3">
+            <label>
+              <input type="checkbox" value="remember-me"> Recordarme
+            </label>
+          </div>
+          <!-- BOTON INICIAR SESION -->
+          <button class="btn btn-lg btn-success btn-block" type="Submit">Iniciar Sesión</button>
+        </div>
+        <br>
+        <div class="card-footer text-muted">
+          <p class="mt-1 mb-1 text-muted">&copy; 2019</p>
+        </div>
+      </div>
+    </form>
+    {% block content %}
+      <!-- REGISTRO -->
+    {% endblock %}
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

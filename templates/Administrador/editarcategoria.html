@@ -1,0 +1,23 @@
+{% extends 'Layouts/baseUsuarios.html'%}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}
+  <title>Editar {{categoria.nombre}}</title>
+{% endblock %}
+{% block content %}
+    <form method="post">
+    {% csrf_token %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <a href="{% url 'listar_categoria' %}" class="btn btn-success">Atrás</a> <br>
+                    <div id="div_id_nombre" class="form-group">
+                        <label for="id_nombre" class=" requiredField">Nombre</label>
+                        <input type="text" name="nombre" value='{{categoria.nombre}}' maxlength="50" class="textinput textInput form-control" required id="id_nombre">
+                    </div>
+                    <input class="btn btn-success" type="submit" value="Modificar">
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}
