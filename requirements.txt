@@ -1,4 +1,5 @@
 appdirs==1.4.3
+asgiref==3.2.7
 astroid==2.3.1
 attrs==19.2.0
 backcall==0.1.0
@@ -14,7 +15,7 @@ defusedxml==0.6.0
 distlib==0.3.0
 dj-database-url==0.5.0
 dj-static==0.0.6
-Django==2.2.2
+Django==3.0.5
 django-bootstrap4==1.1.1
 django-crispy-forms==1.9.0
 entrypoints==0.3
