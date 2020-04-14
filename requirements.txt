@@ -47,6 +47,7 @@ pandocfilters==1.4.2
 parso==0.5.1
 pickleshare==0.7.5
 Pillow==6.0.0
+pipenv==2018.11.26
 prometheus-client==0.7.1
 prompt-toolkit==2.0.10
 psycopg2==2.7.7
@@ -75,6 +76,7 @@ traitlets==4.3.3
 typed-ast==1.4.0
 urllib3==1.25.8
 virtualenv==20.0.17
+virtualenv-clone==0.5.4
 wcwidth==0.1.7
 webencodings==0.5.1
 whitenoise==5.0.1
